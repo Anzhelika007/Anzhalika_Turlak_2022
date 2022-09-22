@@ -5,17 +5,17 @@ from .models import Comment
 
 
 def blog_index(request):
-    posts = Post.objects.all().reverse('created_on')
+    posts = Post.objects.all().order_by('-created_on')
     context = {
         'posts': posts
     }
-    return render(request, 'posts_index.html', context)
+    return render(request, 'blog_index.html', context)
 
 
-def blog_detail(request, blog_id):
-    post = Post.objects.filter(blog_id=blog_id)
+def blog_detail(request, pk):
+    post = Post.objects.get(pk=pk)
     context = {
         'post': post
     }
-    return render(request, 'post_detail.html', context)
+    return render(request, 'blog_detail.html', context)
 
